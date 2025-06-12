@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feliz Dia dos Namorados ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --deep-red: #8b002b;
+      --bright-red: #e0005f;
+      --cream: #fff7f9;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Lato", sans-serif;
+      background: linear-gradient(180deg, var(--deep-red) 0%, var(--bright-red) 100%);
+      color: var(--cream);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    .heart {
+      position: fixed;
+      bottom: -60px;
+      width: 22px;
+      height: 22px;
+      background: rgba(255, 255, 255, .18);
+      transform: rotate(45deg);
+      pointer-events: none;
+      animation: float 12s linear infinite;
+    }
+    .heart::before, .heart::after {
+      content: "";
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      background: inherit;
+      border-radius: 50%;
+    }
+    .heart::before { top: -11px; left: 0; }
+    .heart::after { left: -11px; top: 0; }
+    @keyframes float {
+      0% { transform: translateY(0) rotate(45deg); opacity: .8; }
+      100% { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
+    }
+    header {
+      text-align: center;
+      padding: 4rem 1rem 2rem;
+      font-family: 'Dancing Script', cursive;
+      position: relative;
+    }
+    header h1 {
+      font-size: 3.2rem;
+      letter-spacing: 2px;
+    }
+    .music-control {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+    .music-control button {
+      background: var(--cream);
+      color: var(--deep-red);
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+    }
+    .foto-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 2.5rem 0;
+    }
+    .foto-wrapper img {
+      width: 92%;
+      max-width: 480px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 22px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, .35);
+      transition: transform .4s;
+    }
+    .foto-wrapper img:hover {
+      transform: scale(1.05);
+    }
+    .motivos-section {
+      padding: 2rem 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .motivos-section h2 {
+      font-size: 2.4rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      font-family: 'Dancing Script', cursive;
+    }
+    .motivo-list {
+      list-style: none;
+      counter-reset: item;
+    }
+    .motivo-list li {
+      margin-bottom: 2rem;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 1.9rem 2rem;
+      border-radius: 18px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, .25);
+    }
+    .motivo-list h3 {
+      font-size: 1.8rem;
+      margin-bottom: .6rem;
+      font-weight: 700;
+      padding-left: 2.8rem;
+      position: relative;
+    }
+    .motivo-list h3::before {
+      counter-increment: item;
+      content: counter(item) ".";
+      position: absolute;
+      left: 0;
+      top: -.15rem;
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.2rem;
+      color: var(--cream);
+    }
+    .motivo-list p {
+      font-size: 1.15rem;
+      font-weight: 300;
+      opacity: .97;
+    }
+    .trechos {
+      margin: 4rem auto;
+      max-width: 900px;
+    }
+    .trechos h2 {
+      font-family: 'Dancing Script', cursive;
+      text-align: center;
+      font-size: 2.4rem;
+      margin-bottom: 1.6rem;
+    }
+    .trecho-card {
+      background: rgba(255, 255, 255, 0.10);
+      padding: 1.6rem 1.8rem;
+      border-radius: 16px;
+      box-shadow: 0 5px 14px rgba(0, 0, 0, .25);
+      margin-bottom: 1.6rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .trecho-card img {
+      width: 110px;
+      height: 110px;
+      border-radius: 14px;
+      object-fit: cover;
+    }
+    .trecho-text {
+      font-size: 1.15rem;
+      font-style: italic;
+      flex: 1;
+    }
+    .trecho-btn {
+      padding: 10px 20px;
+      border: none;
+      background: var(--cream);
+      color: var(--deep-red);
+      font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background .3s;
+    }
+    .trecho-btn:hover { background: #ffe9f2; }
+    .declaracao {
+      max-width: 880px;
+      margin: 3rem auto 1rem;
+      background: rgba(255, 255, 255, 0.10);
+      padding: 3rem 2rem;
+      border-radius: 22px;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+    .despedida {
+      text-align: center;
+      font-size: 1.1rem;
+      font-style: italic;
+      margin-bottom: 3rem;
+    }
+    #bgmusic { display: none; }
+  </style>
+</head>
+<body>
+  <script>
+    for(let i=0; i<30; i++){
+      const h=document.createElement('div');
+      h.className='heart';
+      h.style.left=Math.random()*100+'vw';
+      h.style.width=h.style.height=12+Math.random()*18+'px';
+      h.style.animationDuration=8+Math.random()*8+'s';
+      document.body.appendChild(h);
+    }
+  </script>
+  <header>
+    <h1>Feliz Dia dos Namorados, Meu Amor ❤️</h1>
+    <div class="music-control">
+      <audio id="bgmusic" src="audio/Partilhar.mp3" autoplay loop></audio>
+      <button onclick="toggleMusic()">🎵 Play/Pause Música de Fundo</button>
+    </div>
+  </header>
+
+  <div class="foto-wrapper"><img src="foto-inicio.jpg" alt="Foto início"></div>
+
+  <section class="motivos-section">
+    <h2>10 motivos pelos quais eu te amo</h2>
+    <ul class="motivo-list">
+      <li><h3>Seu sorriso</h3><p>Teu sorriso é meu abrigo nos dias escuros, um farol que me guia de volta à paz. ele ilumina tudo ao redor, como se o mundo inteiro ficasse mais bonito só porque você sorriu. quando você sorri pra mim, sinto que sou a pessoa mais sortuda do universo.</p></li>
+      <li><h3>Seu carinho</h3><p>Nos teus gestos delicados, encontro o amor mais puro que já conheci. Teu carinho me acolhe, me cura e me fortalece, mesmo quando o dia está pesado e corrido. É no teu abraço que o mundo para e meu coração encontra seu lar.</p></li>
+      <li><h3>Sua voz</h3><p>Sua voz é a trilha sonora da minha felicidade.Cada palavra dita por você soa como poesia feita só pra mim. Te ouvir me acalma, me inspira e me faz querer estar ao seu lado todos os dias da minha vida.
+
+</p></li>
+      <li><h3>Seu olhar</h3><p>O brilho dos teus olhos me desarma e me entrega por inteiro. Neles eu vejo verdade, vejo amor e vejo futuro.É como se o tempo desacelerasse só pra eu mergulhar no universo que existe dentro de você.
+
+</p></li>
+      <li><h3>Seu jeito bobo</h3><p>Teu jeito bobo me arranca sorrisos nos momentos mais improváveis. Você faz da vida uma comédia romântica perfeita, e eu amo cada cena ao teu lado.Com você, até os dias comuns viram lembranças inesquecíveis.</p></li>
+      <li><h3>Sua inteligência</h3><p>Admiro a forma como você enxerga o mundo, tão única e inspiradora. Você me ensina sem perceber, me faz querer crescer e ser melhor.Tua inteligência vai além das palavras — ela se revela nos detalhes, nas atitudes, no amor.</p></li>
+      <li><h3>Sua força</h3><p>Mesmo quando tudo parece desmoronar, você permanece firme, linda e corajosa. A tua força me faz acreditar que juntos podemos vencer qualquer desafio. Você não apenas se mantém de pé, você me levanta junto contigo.</p></li>
+      <li><h3>Seu coração</h3><p>O teu coração é abrigo, é cuidado, é amor em sua forma mais linda. Você se doa sem esperar nada em troca, e isso me toca profundamente. Amar alguém como você é entender o que significa viver por dois.</p></li>
+      <li><h3>Seu beijo</h3><p>Teu beijo é encontro, é promessa, é poesia que os nossos lábios escrevem em silêncio. Quando me beija, é como se o tempo congelasse e só existisse nós dois. É nesse instante que tudo faz sentido, que o amor se traduz em pele, em alma, em verdade.</p></li>
+      <li><h3>Nosso amor</h3><p>Nosso amor é liberdade com entrega, é leveza com intensidade.
+É tudo o que eu sempre busquei e nunca soube descrever até te encontrar.Com você, aprendi que amar é escolher todos os dias, e eu te escolheria mil vezes, em todas as vidas.
+</p></li>
+    </ul>
+  </section>
+
+  <div class="foto-wrapper"><img src="foto-fim.jpg" alt="Foto fim"></div>
+
+  <section class="trechos">
+    <h2>5 músicas que me lembram você 🎶</h2>
+    <div class="trecho-card"><img src="foto1.jpg"><span class="trecho-text">
+“Só você quem tem o dom,
+de me desligar de tudo,
+e ativar o meu desejo
+em modo absurdo,
+se eu tivesse o poder nas mãos
+de te alegrar todos os dias,
+eu juro, por tudo, faria,
+eu sei que é uma em um milhão,
+a chance de encontrar o grande amor da nossa vida,
+eu sei, que sorte a minha, te encontrei”    Modo absurdo - Ferrugem <audio id="a1" src="audio/Ferrugem-Modo-Absurdo.mp3"></audio><button class="trecho-btn" onclick="toggleTrack('a1')">▶️</button></div>
+    <div class="trecho-card"><img src="foto2.jpg"><span class="trecho-text">“Quantas vezes tentei? Já caí, levantei.
+É você que me mantém de pé.
+Não preciso gritar, você vem me salvar,
+você sente quando eu vou chorar,
+parece não ser desse mundo,
+porque você sabe de tudo,
+Não sei se é ser humano ou se é um anjo,
+exagero é falar de você,
+passo o meu tempo te admirando,
+Só queria saber...”    Ser humano ou anjo - Matheus e Kauan </span><audio id="a2" src="audio/Ser-Humano-ou-Anjo.mp3"></audio><button class="trecho-btn" onclick="toggleTrack('a2')">▶️</button></div>
+    <div class="trecho-card"><img src="foto3.jpg"><span class="trecho-text">“A gente não precisa ta colado, pra ta junto,
+os nossos corpos se conversam por horas e horas,
+sem palavras tão dizendo a todo instante um pro outro,
+o quanto se adoram,
+eu não preciso te olhar,
+pra te ter em meu mundo,
+Porque aonde quer que eu vá,
+você está em tudo,
+Tudo, tudo que eu preciso, oh
+Te vivo.”    Te vivo - Luan Santana </span><audio id="a3" src="audio/Te-Vivo.mp3"></audio><button class="trecho-btn" onclick="toggleTrack('a3')">▶️</button></div>
+    <div class="trecho-card"><img src="foto4.jpg"><span class="trecho-text">"O meu pensamento te segue,
+minha saudade te persegue,
+o meu amor não envelhece,
+cê não sai da minha mente,
+é que você me causa febre,
+de uns 40 graus ou um pouco mais,
+eu quero é você, eu amo só você,
+e o resto tanto faz, tanto faz."    Tanto faz - Luan Santana </span><audio id="a4" src="audio/Tanto-Faz.mp3"></audio><button class="trecho-btn" onclick="toggleTrack('a4')">▶️</button></div>
+    <div class="trecho-card"><img src="foto5.jpg"><span class="trecho-text">"Você já sabe que em qualquer lugar,
+eu tô pensando em você,
+por mais distante que eu pareça estar,
+eu tô pensando em você,
+há tanta coisa fora do lugar
+que eu tento arrumar, por você
+só pra poder te mostrar, que ao seu lado é meu lugar
+e que não há mais ninguém.
+Pensa em mim que eu tô chegando agora,
+não precisa mais chorar,
+é que a saudade eu já deixei lá fora
+espera, eu não demoro a voltar."  Meu Lugar - Onze e vinte </span><audio id="a5" src="audio/Meu-Lugar.mp3"></audio><button class="trecho-btn" onclick="toggleTrack('a5')">▶️</button></div>
+  </section>
+
+  <div class="declaracao">
+    Desde o dia em que te conheci, algo dentro de mim mudou. A vida ganhou novas cores, os dias ficaram mais doces e até os silêncios passaram a ter significado. Cada detalhe seu me encanta, cada gesto me cativa. Você me ensina, me inspira e me completa. Não há palavras que expressem o quanto sou grato por te ter ao meu lado. Prometo estar com você nos dias bons e ruins, sou seu namorado, seu companheiro e além de tudo, seu amigo e quando o mundo "pesar" te lembrarei, todos os dias, que estou contigo e que te amo!<br><br>
+    Você é meu sonho real, meu lar, meu amor eterno.
+  </div>
+
+  <div class="despedida">Com amor, de quem encontrou no seu coração o maior presente da vida.<br><br><strong>Waldyr :)</strong> 💌</div>
+
+  <script>
+    function toggleMusic() {
+      const music = document.getElementById('bgmusic');
+      if (music.paused) music.play();
+      else music.pause();
+    }
+    function toggleTrack(id) {
+      const track = document.getElementById(id);
+      if (track.paused) {
+        document.querySelectorAll('audio').forEach(a => { if (a !== track) a.pause(); });
+        track.play();
+      } else {
+        track.pause();
+      }
+    }
+  </script>
+</body>
+</html>
+"""
